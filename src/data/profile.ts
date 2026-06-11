@@ -1,29 +1,28 @@
 // ============================================================
 // PROFILE DATA — edit this file to update the entire site.
-// Items marked [PLACEHOLDER] need real data from your resume.
 // ============================================================
 
 export const profile = {
   name: "Niket Dhale",
-  kanji: "ニケット", // katakana accent in hero — remove if not wanted
-  title: "Automotive Cybersecurity Engineer",
+  kanji: "ニケット",
+  title: "Automotive Cybersecurity & Embedded Software Engineer",
   tagline:
-    "Securing vehicle networks for 5+ years — now building toward Software-Defined Vehicles and embedded platforms.",
-  location: "Japan",
-  email: "hello@example.com", // [PLACEHOLDER]
+    "5+ years securing vehicle networks at a major Japanese OEM — AUTOSAR IDS/SecOC, WP.29 certification, and full-stack ECU security from CAN to SOC.",
+  location: "Tokyo, Japan",
+  email: "niketdhale27@gmail.com",
   github: "https://github.com/niketdhale",
-  linkedin: "https://www.linkedin.com/in/niketdhale", // [PLACEHOLDER] verify handle
-  resumeUrl: "/resume.pdf", // drop your v13 PDF into /public as resume.pdf
+  linkedin: "https://www.linkedin.com/in/niketdhale",
+  resumeUrl: "/portfolio/resume.pdf",
 };
 
 export const about = [
-  `I work at the intersection of vehicle networks and security engineering — CAN, SecOC, intrusion detection, and the AUTOSAR stack that ties it together. Over five years in automotive cybersecurity, I've moved from analysing attacks on ECUs to building the systems that detect and report them.`,
-  `Right now I'm deep in an open-source AUTOSAR security ecosystem: an IdsM event manager, a CAN intrusion-detection toolkit, and a SecOC verification layer, wired together into a full sensor-to-SOC reporting pipeline. It's both a portfolio and a thesis: vehicle security should be observable end-to-end.`,
-  `Based in Japan, I'm steering my career toward Software-Defined Vehicle platforms and embedded software, where security is designed in rather than bolted on.`,
+  `I'm an automotive cybersecurity engineer working on-site at Nissan Motor, leading a ~10-engineer team across the full vehicle security stack — from CAN-level JASPAR MAC authentication and AUTOSAR SecOC, through AUTOSAR IDS violation aggregation and off-board reporting, to ECU bootstrap and certificate provisioning for Gateway, IVI, and IVC.`,
+  `I've directly contributed to WP.29/UN-R155 cybersecurity certification for 6 vehicle lines — ICE, E-Power, and EV — and presented security demonstrations at CAR-ELE 2022. On the open-source side I'm building a full AUTOSAR security ecosystem: IdsM toolkit, CAN IDS, SecOC simulator, and a DoIP ECU simulator, all wired into a sensor-to-SOC pipeline.`,
+  `Based in Tokyo and studying Japanese. My next move is toward Software-Defined Vehicle platforms and embedded software, where security is designed in from the start rather than layered on after.`,
 ];
 
 export type Project = {
-  id: string; // hex "register id" shown as decoration
+  id: string;
   name: string;
   repo: string;
   lang: string;
@@ -40,12 +39,12 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/autosar-idsm-toolkit",
     lang: "C++",
     summary:
-      "AUTOSAR Intrusion Detection System Manager (IdsM) with a pluggable reporting pipeline from ECU to Security Operations Center.",
+      "AUTOSAR IdsM implementation with async event aggregation, SOC violation forwarding via HTTP, and a 39-test GoogleTest suite referencing SWS_IdM spec requirements.",
     details: [
       "IdsR_ReportType structs with namespaced event IDs (0x01xx CAN IDS, 0x02xx SecOC)",
       "IIdsM_ReportingChannel abstraction — IPC and SOME/IP (vsomeip) implementations",
       "IdsR forwarder with pluggable transports: MQTT, WebSocket, HTTP REST",
-      "Custom serializer interface for user-defined context formats (0x8000+ range)",
+      "39 GoogleTest cases mapped directly to AUTOSAR SWS_IdM requirements",
     ],
     tags: ["AUTOSAR", "IdsM/IdsR", "SOME/IP", "MQTT", "C++"],
     featured: true,
@@ -56,13 +55,14 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/can-ids-toolkit",
     lang: "C++",
     summary:
-      "Intrusion detection for CAN bus traffic — anomaly detectors that feed qualified security events into the IdsM pipeline.",
+      "Whitelist-based CAN IDS with DLC validation and frequency monitoring, aligned with AUTOSAR IDS Protocol Specification — designed for HIL testing and bench validation.",
     details: [
-      "Rule- and heuristic-based detection over SocketCAN / vcan",
-      "Module context structs (CanIds_ContextData) with serialize/deserialize",
-      "Adapter into autosar-idsm-toolkit for end-to-end event flow",
+      "Whitelist enforcement + DLC validation + message frequency monitoring",
+      "Aligned to AUTOSAR IDS Protocol Specification",
+      "Designed for HIL testing and bench validation environments",
+      "Feeds qualified security events into the IdsM pipeline",
     ],
-    tags: ["CAN", "SocketCAN", "IDS", "C++"],
+    tags: ["CAN", "SocketCAN", "IDS", "AUTOSAR", "C++"],
     featured: true,
   },
   {
@@ -71,17 +71,34 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/secoc-can-toolkit",
     lang: "C++",
     summary:
-      "AUTOSAR SecOC implementation for CAN — message authentication, freshness management, and verification-failure reporting.",
+      "AUTOSAR SecOC simulator with OpenSSL AES-128-CMAC, freshness value management, and AUTOSAR C API (SecOc_Init, SecOc_Transmit) over Linux SocketCAN.",
     details: [
-      "MAC generation/verification per AUTOSAR SecOC profiles",
-      "Freshness value management",
-      "Failure events reported as 0x02xx security events to IdsM",
+      "AES-128-CMAC MAC generation/verification via OpenSSL",
+      "Freshness value management per AUTOSAR SecOC profiles",
+      "AUTOSAR C API surface: SecOc_Init, SecOc_Transmit",
+      "Runs over Linux SocketCAN / vcan",
     ],
-    tags: ["SecOC", "AUTOSAR", "Crypto", "C++"],
+    tags: ["SecOC", "AUTOSAR", "OpenSSL", "SocketCAN", "C++"],
     featured: true,
   },
   {
     id: "0x0300",
+    name: "DoIP_ECU_Simulator",
+    repo: "https://github.com/niketdhale/DoIP_ECU_Simulator",
+    lang: "C",
+    summary:
+      "Full ISO 13400-2 DoIP ECU simulator with UDS service handling (ISO 14229), TLS extension, and unit + integration test suite.",
+    details: [
+      "Full ISO 13400-2 DoIP protocol implementation",
+      "UDS service handling per ISO 14229",
+      "TLS extension for secure diagnostic sessions",
+      "Unit and integration test suite included",
+    ],
+    tags: ["DoIP", "UDS", "ISO 13400", "TLS", "C"],
+    featured: true,
+  },
+  {
+    id: "0x0400",
     name: "SOC dashboard pipeline",
     repo: "https://github.com/niketdhale/autosar-idsm-toolkit",
     lang: "Infra",
@@ -96,7 +113,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "0x0400",
+    id: "0x0500",
     name: "Verso — resume builder",
     repo: "https://github.com/niketdhale/resume-builder",
     lang: "Vue 3",
@@ -112,7 +129,6 @@ export const projects: Project[] = [
   },
 ];
 
-// [PLACEHOLDER] — replace with real entries from v13 resume
 export type Experience = {
   role: string;
   company: string;
@@ -124,13 +140,30 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     role: "Automotive Cybersecurity Engineer",
-    company: "[Company — from resume]",
-    period: "20XX — Present",
-    location: "Japan",
+    company: "Nissan Motor Co., Ltd. (on-site via TCS Japan)",
+    period: "Apr 2022 — Present",
+    location: "Tokyo, Japan",
     points: [
-      //"[PLACEHOLDER — upload v13 resume to fill real bullet points]",
-      //"[e.g. threat analysis & risk assessment per ISO/SAE 21434]",
-      //"[e.g. SecOC / IDS integration on production ECU platforms]",
+      "Lead a ~10-engineer team delivering cybersecurity test development and validation for Central Gateway ECU across CAN, DoIP, SOME/IP, and Automotive Ethernet attack surfaces (ISO/SAE 21434).",
+      "Architected and developed C#-based test automation tooling — reduced manual validation effort by 90% across multiple vehicle programs.",
+      "Developed test scenarios and tools for AUTOSAR SecOC (AES-128-CMAC) and JASPAR MAC authentication over CAN — verifying message integrity between Gateway, Domain ECUs, and external ECUs.",
+      "Built end-to-end IDS pipeline validation tooling for AUTOSAR IDSM violation aggregation and IDSR off-board reporting via MQTTS/HTTPS.",
+      "Validated ECU bootstrap and certificate provisioning for GW, IVI, and IVC — covering TLS handshake, PKI certificate exchange, and secure key management.",
+      "Led CSMS demonstration to Japanese government regulators → supported UN-R155/WP.29 production approval for 6 vehicle lines (ICE, E-Power, EV).",
+      "Performed reverse engineering of ECU implementations to verify AUTOSAR IDS, JASPAR, and SecOC spec compliance; identified and resolved 5 critical vulnerabilities → 70% improvement in ECU security posture.",
+      "Conducted TARA for Domain ECU (MAC) and Central Gateway (IDS); produced threat models driving product security requirements.",
+    ],
+  },
+  {
+    role: "Security Technology Developer — Automotive Systems",
+    company: "Tata Consultancy Services (TCS)",
+    period: "Oct 2020 — Apr 2022",
+    location: "Pune, India",
+    points: [
+      "Architected and implemented an ISO-15118 compliant EV charging communication system (C / Qt UI) with TLS mutual authentication and Plug & Charge (PnC) over PLC and Automotive Ethernet — demonstrated at CAR-ELE 2022.",
+      "Designed and developed a C#/CANoe-based CAN injection simulation tool and IDS meter-cluster visualization system to demonstrate Central Gateway IDS capabilities at CAR-ELE 2021.",
+      "Authored full technical documentation for both systems covering security architecture, protocol implementation, and test procedures — reviewed by OEM stakeholders.",
+      "Performed TARA of CAN signals and in-vehicle networks; developed ECU cybersecurity validation tooling.",
     ],
   },
 ];
@@ -140,12 +173,16 @@ export const skills = [
     group: "Vehicle Security",
     reg: "0x01",
     items: [
-      "SecOC",
-      "IDS / IdsM / IdsR",
       "ISO/SAE 21434",
-      "UDS Security (0x27/0x29)",
+      "UN-R155 / WP.29",
+      "TARA",
+      "AUTOSAR SecOC",
+      "AUTOSAR IdsM / IdsR",
+      "JASPAR MAC",
+      "TLS / PKI",
       "Secure OTA",
-      "Threat Analysis (TARA)",
+      "ECU Provisioning",
+      "Reverse Engineering",
     ],
   },
   {
@@ -154,27 +191,29 @@ export const skills = [
     items: [
       "CAN / CAN FD",
       "SOME/IP",
-      "DoIP",
+      "DoIP (ISO 13400)",
       "UDS (ISO 14229)",
-      "gPTP / 802.1AS",
-      "TSN",
-      "MQTT",
+      "Automotive Ethernet",
+      "ISO-15118 / PLC",
+      "MQTTS / HTTPS",
     ],
   },
   {
-    group: "Platforms & Middleware",
+    group: "Platforms & Tooling",
     reg: "0x03",
     items: [
       "AUTOSAR Classic",
-      "AUTOSAR Adaptive",
+      "Vector CANoe / CANalyzer",
+      "Linux / SocketCAN",
+      "Wireshark",
       "FreeRTOS",
-      "Embedded Linux",
-      "vsomeip",
-      "DDS",
+      "Qt",
+      "CAPL",
+      "Git / SVN",
     ],
   },
   {
-    group: "Languages & Tooling",
+    group: "Languages",
     reg: "0x04",
     items: [
       "C / C++",
@@ -190,7 +229,6 @@ export const skills = [
 ];
 
 export const languages = [
-  { name: "English", level: "Professional" },
+  { name: "English", level: "Native" },
   { name: "Japanese", level: "Conversational" },
-  // [PLACEHOLDER] add native language from resume
 ];
