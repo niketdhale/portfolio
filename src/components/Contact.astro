@@ -1,0 +1,46 @@
+---
+import { profile } from "../data/profile";
+import Icon from "./Icons.astro";
+const year = new Date().getFullYear();
+---
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <p class="reg-label"><span class="hex">0x0FF</span> · REGISTER / CONTACT</p>
+      <h2 class="section-title">Building SDV platforms?<br />Let's <em>talk</em>.</h2>
+      <p class="section-sub">
+        Open to Software-Defined Vehicle and embedded software roles — and always happy to
+        compare notes on AUTOSAR security.
+      </p>
+      <div class="cta">
+        <a class="btn solid" href={`mailto:${profile.email}`}><Icon name="mail" /> Email me</a>
+        <a class="btn" href={profile.linkedin} target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
+        <a class="btn" href={profile.github} target="_blank" rel="noopener"><Icon name="github" /> GitHub</a>
+      </div>
+    </div>
+
+    <footer>
+      <span>© {year} {profile.name}</span>
+      <span>ACK · EOF · built with Astro</span>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .contact-panel {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background:
+      radial-gradient(600px 260px at 90% 0%, var(--glow-a), transparent 60%),
+      var(--bg-panel);
+    padding: clamp(28px, 5vw, 56px);
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+</style>

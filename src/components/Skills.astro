@@ -1,0 +1,52 @@
+---
+import { skills, languages } from "../data/profile";
+---
+
+<section class="block" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="reg-label"><span class="hex">0x040</span> · REGISTER / CAPABILITIES</p>
+      <h2 class="section-title">The <em>stack</em>,<br />top to bottom.</h2>
+    </div>
+
+    <div class="groups">
+      {
+        skills.map((s) => (
+          <div class="group">
+            <p class="reg-label"><span class="hex">{s.reg}</span> · {s.group.toUpperCase()}</p>
+            <p class="items">{s.items.join(" · ")}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="langs mono">
+      {languages.map((l, i) => (
+        <span>{i > 0 && "  /  "}{l.name} ({l.level})</span>
+      ))}
+    </p>
+  </div>
+</section>
+
+<style>
+  .groups {
+    border-top: 1px solid var(--line);
+  }
+
+  .group {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .items { color: var(--ink-dim); font-size: 15px; }
+
+  .langs { margin-top: 22px; font-size: 12.5px; color: var(--ink-faint); }
+
+  @media (max-width: 640px) {
+    .group { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import { experience } from "../data/profile";
+---
+
+<section class="block" id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="reg-label"><span class="hex">0x030</span> · REGISTER / EXPERIENCE</p>
+      <h2 class="section-title">Five years on<br />the <em>bus</em>.</h2>
+    </div>
+
+    <div class="timeline">
+      {
+        experience.map((e) => (
+          <article class="entry">
+            <div class="meta mono">
+              <span class="period">{e.period}</span>
+              <span class="loc">{e.location}</span>
+            </div>
+            <div class="body">
+              <h3>{e.role}</h3>
+              <p class="company">{e.company}</p>
+              <ul>
+                {e.points.map((pt) => (
+                  <li>{pt}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .meta {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .period { color: var(--accent); }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+  .company { color: var(--ink-dim); font-size: 14px; margin: 2px 0 10px; }
+
+  ul {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--ink-dim);
+  }
+
+  ul li::before { content: "— "; color: var(--ink-faint); }
+
+  @media (max-width: 640px) {
+    .entry { grid-template-columns: 1fr; gap: 8px; }
+    .meta { flex-direction: row; gap: 14px; }
+  }
+</style>

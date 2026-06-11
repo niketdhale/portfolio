@@ -1,0 +1,125 @@
+---
+import { projects } from "../data/profile";
+import Icon from "./Icons.astro";
+const featured = projects.filter((p) => p.featured);
+---
+
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="reg-label"><span class="hex">0x020</span> · REGISTER / PROJECTS</p>
+      <h2 class="section-title">An open-source<br />security <em>pipeline</em>.</h2>
+      <p class="section-sub">
+        Three interlocking AUTOSAR toolkits — detection, authentication, and event management —
+        plus the cloud side that makes vehicle security events observable.
+      </p>
+    </div>
+
+    <div class="grid">
+      {
+        featured.map((p) => (
+          <a class="card" href={p.repo} target="_blank" rel="noopener">
+            <div class="card-top mono">
+              <span class="hexid">{p.id}</span>
+              <span class="lang">{p.lang} <Icon name="external" size={12} /></span>
+            </div>
+            <h3>{p.name}</h3>
+            <p class="summary">{p.summary}</p>
+            <ul>
+              {p.details.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+            <div class="tags mono">
+              {p.tags.map((t) => (
+                <span>{t}</span>
+              ))}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .hexid { color: var(--accent); }
+
+  .lang {
+    color: var(--ink-faint);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .lang :global(svg) { opacity: 0; transition: opacity 140ms ease; }
+  .card:hover .lang :global(svg) { opacity: 1; color: var(--accent); }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+  }
+
+  .summary { color: var(--ink-dim); font-size: 15px; }
+
+  ul {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+  }
+
+  ul li::before {
+    content: "▸ ";
+    color: var(--teal);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+
+  .tags span {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+</style>

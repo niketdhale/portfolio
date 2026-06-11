@@ -1,0 +1,26 @@
+---
+import { about } from "../data/profile";
+---
+
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="reg-label"><span class="hex">0x010</span> · REGISTER / ABOUT</p>
+      <h2 class="section-title">From attack surface<br />to <em>architecture</em>.</h2>
+    </div>
+    <div class="cols">
+      {about.map((p) => <p>{p}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 3vw, 40px);
+    color: var(--ink-dim);
+  }
+
+  .cols p:first-child { color: var(--ink); }
+</style>
