@@ -128,17 +128,10 @@ export const experience: Experience[] = [
     period: "20XX — Present",
     location: "Japan",
     points: [
-      "[PLACEHOLDER — upload v13 resume to fill real bullet points]",
-      "[e.g. threat analysis & risk assessment per ISO/SAE 21434]",
-      "[e.g. SecOC / IDS integration on production ECU platforms]",
+      //"[PLACEHOLDER — upload v13 resume to fill real bullet points]",
+      //"[e.g. threat analysis & risk assessment per ISO/SAE 21434]",
+      //"[e.g. SecOC / IDS integration on production ECU platforms]",
     ],
-  },
-  {
-    role: "[Earlier role]",
-    company: "[Company]",
-    period: "20XX — 20XX",
-    location: "[Location]",
-    points: ["[PLACEHOLDER]"],
   },
 ];
 
