@@ -17,7 +17,7 @@ export const profile = {
 
 export const about = [
   `I'm an automotive cybersecurity engineer working on-site at Nissan Motor, leading a ~10-engineer team across the full vehicle security stack — from CAN-level JASPAR MAC authentication and AUTOSAR SecOC, through AUTOSAR IDS violation aggregation and off-board reporting, to ECU bootstrap and certificate provisioning for Gateway, IVI, and IVC.`,
-  `I've directly contributed to WP.29/UN-R155 cybersecurity certification for 6 vehicle lines — ICE, E-Power, and EV — and presented security demonstrations at CAR-ELE 2022. On the open-source side I'm building a full AUTOSAR security ecosystem: IdsM toolkit, CAN IDS, SecOC simulator, and a DoIP ECU simulator, all wired into a sensor-to-SOC pipeline.`,
+  `I've directly contributed to WP.29/UN-R155 cybersecurity certification for 6 vehicle lines — ICE, E-Power, and EV — and presented security demonstrations at CAR-ELE 2022. On the open-source side I'm building a full AUTOSAR security ecosystem: IdsM toolkit, CAN IDS, SecOC simulator, and a DoIP ECU simulator, all wired into a sensor-to-SOC pipeline — and, on top of it, sovd-toolkit, a production-shaped SOVD server/client stack that talks real UDS/DoIP to those same simulated ECUs behind a REST/HTTP+JSON diagnostic API.`,
   `Based in Tokyo and studying Japanese. My next move is toward Software-Defined Vehicle platforms and embedded software, where security is designed in from the start rather than layered on after.`,
 ];
 
@@ -125,6 +125,22 @@ export const projects: Project[] = [
       "GitHub Actions pipeline: lint → unit tests → Playwright E2E → deploy",
     ],
     tags: ["Vue 3", "Vite", "Tailwind", "CI/CD"],
+    featured: true,
+  },
+  {
+    id: "0x0600",
+    name: "sovd-toolkit",
+    repo: "https://github.com/niketdhale/sovd-toolkit",
+    lang: "C++",
+    summary:
+      "A production-shaped SOVD (ASAM/ISO 17978-3) server and client stack for Linux — real UDS/DoIP translation behind a REST/HTTP+JSON diagnostic API, a two-tier gateway/domain topology, and security treated as a first-class requirement throughout.",
+    details: [
+      "C-ABI adapter seam translating SOVD calls into real UDS/DoIP services (0x22/0x2E/0x2F, 0x19/0x14, 0x10, 0x31, 0x27) against classic, SOVD-unaware ECUs",
+      "Vehicle-level gateway proxying to per-domain servers over mutual TLS, with OAuth2 bearer auth and SecurityAccess gating both the ECU and the caller",
+      "Vue 3 web UI and a C++ client SDK/CLI, both built purely from server self-description via /docs — zero hardcoded DIDs",
+      "Security events feed MQTT → Telegraf → InfluxDB → Grafana; four-adapter-config CI matrix with a CycloneDX SBOM published per run",
+    ],
+    tags: ["SOVD", "UDS/DoIP", "mTLS", "OAuth2", "Vue 3", "C++"],
     featured: true,
   },
 ];
