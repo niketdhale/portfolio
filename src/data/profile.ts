@@ -41,14 +41,13 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/sovd-toolkit",
     lang: "C++",
     summary:
-      "A production-shaped SOVD (ASAM/ISO 17978-3) server and client stack for Linux — real UDS/DoIP translation behind a REST/HTTP+JSON diagnostic API, a two-tier gateway/domain topology, and security treated as a first-class requirement throughout.",
+      "SOVD (ASAM/ISO 17978-3) server and client stack for Linux: real UDS/DoIP translation behind a REST/JSON diagnostic API, with a two-tier gateway topology and security throughout.",
     details: [
-      "C-ABI adapter seam translating SOVD calls into real UDS/DoIP services (0x22/0x2E/0x2F, 0x19/0x14, 0x10, 0x31, 0x27) against classic, SOVD-unaware ECUs",
-      "Vehicle-level gateway proxying to per-domain servers over mutual TLS, with OAuth2 bearer auth and SecurityAccess gating both the ECU and the caller",
-      "Vue 3 web UI and a C++ client SDK/CLI, both built purely from server self-description via /docs — zero hardcoded DIDs",
-      "Security events feed MQTT → Telegraf → InfluxDB → Grafana; four-adapter-config CI matrix with a CycloneDX SBOM published per run",
+      "C-ABI adapter translating SOVD calls into real UDS/DoIP services against classic, SOVD-unaware ECUs",
+      "Gateway proxying to per-domain servers over mutual TLS, with OAuth2 bearer auth and SecurityAccess gating",
+      "Vue 3 web UI and C++ client SDK/CLI built from server self-description via /docs, with no hardcoded DIDs",
     ],
-    tags: ["SOVD", "UDS/DoIP", "mTLS", "OAuth2", "Vue 3", "C++"],
+    tags: ["SOVD", "UDS/DoIP", "mTLS", "OAuth2", "C++"],
     featured: true,
   },
   {
@@ -57,15 +56,13 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/UDS-29-auth-toolkit",
     lang: "C",
     summary:
-      "A small, embeddable ISO 14229-1:2020 service 0x29 (Authentication) implementation in plain C11 with certificate-based unidirectional and bidirectional authentication, covering both the tester (client) and the ECU (server) with static memory and no heap. Includes OEM-definable certificate-based access control, a simulated ECU with fault injection, and an optional bridge that reports authentication failures to the AUTOSAR IDSM toolkit.",
+      "Embeddable ISO 14229-1:2020 service 0x29 (Authentication) in plain C11: certificate-based client and ECU sides, static memory, no heap, plus a simulated ECU with fault injection.",
     details: [
-      "AUTOSAR-style client API (blocking and non-blocking StartAuthentication/MainFunction/RxIndication) and DCM-style server handler Uds29Srv_HandleRequest, supporting sub-functions 0x00-0x03 and 0x08 with standard NRCs",
-      "Certificate validation pipeline: chain of trust through intermediate CAs, validity with trusted-time hook, CRL and serial blacklist, keyUsage/EKU and key-type/signature-algorithm policy",
-      "Access control from the client certificate: roles and service/DID/routine allow-lists in an OEM-defined format, enforced against an ECU rule table with NRC 0x34",
-      "Pluggable crypto (OpenSSL ECDSA P-256/Ed25519, mbedTLS 3.x, or HSM/PKCS#11) and OS port (POSIX on Linux/QNX, FreeRTOS); about 44 KB static RAM for the client and 5.3 KB for the server",
-      "Simulated ECU with fault injection (expired cert, bad signature, challenge mismatch), interactive uds29_cli, two-process DoIP and CAN ISO-TP demos, GoogleTest suites and a CI matrix",
+      "AUTOSAR-style client API and DCM-style server handler, supporting sub-functions 0x00-0x03 and 0x08",
+      "Certificate validation: chain of trust, trusted-time validity, CRL and serial blacklist, EKU and algorithm policy",
+      "Pluggable crypto (OpenSSL, mbedTLS, PKCS#11) and OS port (POSIX, FreeRTOS); ~44 KB RAM client, 5.3 KB server",
     ],
-    tags: ["UDS 0x29", "ISO 14229-1", "X.509 PKI", "Access Control", "DoIP", "ISO-TP", "mbedTLS", "C11"],
+    tags: ["UDS 0x29", "ISO 14229-1", "X.509 PKI", "mbedTLS", "C11"],
     featured: true,
   },
   {
@@ -76,10 +73,9 @@ export const projects: Project[] = [
     summary:
       "AUTOSAR SecOC simulator in C++17 over Linux SocketCAN: AES-128-CMAC, counter/timestamp Freshness Value Manager, configurable MAC/FV truncation, anti-replay window, and an AUTOSAR-style C API.",
     details: [
-      "AES-128-CMAC MAC generation/verification via OpenSSL",
+      "AES-128-CMAC MAC generation and verification via OpenSSL",
       "Freshness value management per AUTOSAR SecOC profiles",
-      "AUTOSAR C API surface: SecOc_Init, SecOc_Transmit",
-      "Runs over Linux SocketCAN / vcan",
+      "AUTOSAR C API (SecOc_Init, SecOc_Transmit) running over Linux SocketCAN / vcan",
     ],
     tags: ["SecOC", "AUTOSAR", "OpenSSL", "SocketCAN", "C++"],
     featured: true,
@@ -92,8 +88,7 @@ export const projects: Project[] = [
     summary:
       "Lightweight, zero-dependency C++17 CAN intrusion detection library and CLI: default-deny ID whitelist, Classic/CAN FD DLC validation, and frequency-based flood detection with thread-safe rules.",
     details: [
-      "Whitelist enforcement + DLC validation + message frequency monitoring",
-      "Aligned to AUTOSAR IDS Protocol Specification",
+      "Whitelist enforcement, DLC validation and message frequency monitoring, aligned to AUTOSAR IDS spec",
       "Designed for HIL testing and bench validation environments",
       "Feeds qualified security events into the IdsM pipeline",
     ],
@@ -109,8 +104,7 @@ export const projects: Project[] = [
       "AUTOSAR IdsM implementation with async event aggregation, SOC violation forwarding via HTTP, and a 39-test GoogleTest suite referencing SWS_IdM spec requirements.",
     details: [
       "IdsR_ReportType structs with namespaced event IDs (0x01xx CAN IDS, 0x02xx SecOC)",
-      "IIdsM_ReportingChannel abstraction — IPC and SOME/IP (vsomeip) implementations",
-      "IdsR forwarder with pluggable transports: MQTT, WebSocket, HTTP REST",
+      "IIdsM_ReportingChannel abstraction (IPC, SOME/IP via vsomeip) and IdsR forwarder over MQTT, WebSocket, HTTP",
       "39 GoogleTest cases mapped directly to AUTOSAR SWS_IdM requirements",
     ],
     tags: ["AUTOSAR", "IdsM/IdsR", "SOME/IP", "MQTT", "C++"],
@@ -124,8 +118,7 @@ export const projects: Project[] = [
     summary:
       "ISO 13400-2 DoIP stack in C: an ECU simulator plus a reusable client library (libdoip) with UDS forwarding, TLS/DTLS, ISO-TP, IPv6 and an async API.",
     details: [
-      "Full ISO 13400-2 DoIP protocol implementation",
-      "UDS service handling per ISO 14229",
+      "Full ISO 13400-2 DoIP protocol implementation with UDS service handling per ISO 14229",
       "TLS extension for secure diagnostic sessions",
       "Unit and integration test suite included",
     ],
@@ -142,7 +135,7 @@ export const projects: Project[] = [
     details: [
       "Telegraf ingestion shaped to the IdsR_ReportType schema",
       "Grafana dashboards for fleet-level event correlation",
-      "All Apache-2.0/MIT components — safe for commercial/OEM contexts",
+      "All Apache-2.0/MIT components, safe for commercial/OEM contexts",
     ],
     tags: ["Grafana", "InfluxDB", "Telegraf", "MQTT"],
     featured: true,
@@ -153,15 +146,13 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/repro-toolkit",
     lang: "Rust",
     summary:
-      "A cross-platform Rust library and CLI for automotive ECU reprogramming that parses a PDX archive (ZIP-packaged ODX, ISO 22901) and generates the ordered UDS (ISO 14229) repro sequence as a JSON document. The same implementation works as a Rust library, from any language over a small C ABI, or as a standalone CLI, on Linux and Windows.",
+      "Cross-platform Rust library and CLI for ECU reprogramming: parses a PDX archive (ZIP-packaged ODX, ISO 22901) and generates the ordered UDS (ISO 14229) repro sequence as JSON.",
     details: [
-      "Orders steps into the canonical UDS flash sequence: session control, security seed/key, erase, RequestDownload, TransferData, transfer exit, check memory, ECU reset; unmatched services are kept as OTHER so nothing from the ODX is dropped",
-      "TransferData chunking per flash block honouring UDS maxNumberOfBlockLength (configurable, default 0x0FFF), with a wrapping BlockSequenceCounter on each chunk",
-      "Custom sequence JSON files to insert vendor steps, reorder or replace the default, plus a validate command that lints for overlapping byte positions, invalid hex and out-of-order steps",
-      "FFI via six C-ABI functions returning JSON, with runnable examples for C, C++, Python, C# and Rust",
-      "Negative response codes annotated with ISO 14229-1 names; Cargo workspace of core, ffi and cli crates with CI",
+      "Orders steps into the canonical UDS flash sequence; unmatched services are kept as OTHER so nothing is dropped",
+      "TransferData chunking honouring maxNumberOfBlockLength, with a wrapping BlockSequenceCounter on each chunk",
+      "Usable as a Rust library, over a small C ABI (C, C++, Python, C# examples), or as a CLI on Linux and Windows",
     ],
-    tags: ["Rust", "ODX/PDX", "ISO 22901", "UDS", "ECU flashing", "FFI", "CLI"],
+    tags: ["Rust", "ODX/PDX", "UDS", "FFI", "CLI"],
     featured: true,
   },
 ];
