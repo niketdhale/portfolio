@@ -37,34 +37,33 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "0x0100",
-    name: "autosar-idsm-toolkit",
-    repo: "https://github.com/niketdhale/autosar-idsm-toolkit",
+    name: "sovd-toolkit",
+    repo: "https://github.com/niketdhale/sovd-toolkit",
     lang: "C++",
     summary:
-      "AUTOSAR IdsM implementation with async event aggregation, SOC violation forwarding via HTTP, and a 39-test GoogleTest suite referencing SWS_IdM spec requirements.",
+      "A production-shaped SOVD (ASAM/ISO 17978-3) server and client stack for Linux — real UDS/DoIP translation behind a REST/HTTP+JSON diagnostic API, a two-tier gateway/domain topology, and security treated as a first-class requirement throughout.",
     details: [
-      "IdsR_ReportType structs with namespaced event IDs (0x01xx CAN IDS, 0x02xx SecOC)",
-      "IIdsM_ReportingChannel abstraction — IPC and SOME/IP (vsomeip) implementations",
-      "IdsR forwarder with pluggable transports: MQTT, WebSocket, HTTP REST",
-      "39 GoogleTest cases mapped directly to AUTOSAR SWS_IdM requirements",
+      "C-ABI adapter seam translating SOVD calls into real UDS/DoIP services (0x22/0x2E/0x2F, 0x19/0x14, 0x10, 0x31, 0x27) against classic, SOVD-unaware ECUs",
+      "Vehicle-level gateway proxying to per-domain servers over mutual TLS, with OAuth2 bearer auth and SecurityAccess gating both the ECU and the caller",
+      "Vue 3 web UI and a C++ client SDK/CLI, both built purely from server self-description via /docs — zero hardcoded DIDs",
+      "Security events feed MQTT → Telegraf → InfluxDB → Grafana; four-adapter-config CI matrix with a CycloneDX SBOM published per run",
     ],
-    tags: ["AUTOSAR", "IdsM/IdsR", "SOME/IP", "MQTT", "C++"],
+    tags: ["SOVD", "UDS/DoIP", "mTLS", "OAuth2", "Vue 3", "C++"],
     featured: true,
   },
   {
     id: "0x0101",
-    name: "can-ids-toolkit",
-    repo: "https://github.com/niketdhale/can-ids-toolkit",
-    lang: "C++",
+    name: "UDS-29-auth-toolkit",
+    repo: "https://github.com/niketdhale/UDS-29-auth-toolkit",
+    lang: "C",
     summary:
-      "Lightweight, zero-dependency C++17 CAN intrusion detection library and CLI: default-deny ID whitelist, Classic/CAN FD DLC validation, and frequency-based flood detection with thread-safe rules.",
+      "ISO 14229-1 UDS 0x29 Authentication toolkit in C11: tester (client) and ECU (server) with X.509 PKI and OEM-configurable certificate-based access control.",
     details: [
-      "Whitelist enforcement + DLC validation + message frequency monitoring",
-      "Aligned to AUTOSAR IDS Protocol Specification",
-      "Designed for HIL testing and bench validation environments",
-      "Feeds qualified security events into the IdsM pipeline",
+      "DoIP and CAN ISO-TP transports with an AUTOSAR-style API",
+      "Runs on Linux, QNX and FreeRTOS",
+      "OpenSSL, mbedTLS or HSM crypto backends; optional IDSM reporting",
     ],
-    tags: ["CAN", "SocketCAN", "IDS", "AUTOSAR", "C++"],
+    tags: ["UDS 0x29", "X.509 PKI", "DoIP", "ISO-TP", "C11"],
     featured: true,
   },
   {
@@ -85,6 +84,38 @@ export const projects: Project[] = [
   },
   {
     id: "0x0300",
+    name: "can-ids-toolkit",
+    repo: "https://github.com/niketdhale/can-ids-toolkit",
+    lang: "C++",
+    summary:
+      "Lightweight, zero-dependency C++17 CAN intrusion detection library and CLI: default-deny ID whitelist, Classic/CAN FD DLC validation, and frequency-based flood detection with thread-safe rules.",
+    details: [
+      "Whitelist enforcement + DLC validation + message frequency monitoring",
+      "Aligned to AUTOSAR IDS Protocol Specification",
+      "Designed for HIL testing and bench validation environments",
+      "Feeds qualified security events into the IdsM pipeline",
+    ],
+    tags: ["CAN", "SocketCAN", "IDS", "AUTOSAR", "C++"],
+    featured: true,
+  },
+  {
+    id: "0x0400",
+    name: "autosar-idsm-toolkit",
+    repo: "https://github.com/niketdhale/autosar-idsm-toolkit",
+    lang: "C++",
+    summary:
+      "AUTOSAR IdsM implementation with async event aggregation, SOC violation forwarding via HTTP, and a 39-test GoogleTest suite referencing SWS_IdM spec requirements.",
+    details: [
+      "IdsR_ReportType structs with namespaced event IDs (0x01xx CAN IDS, 0x02xx SecOC)",
+      "IIdsM_ReportingChannel abstraction — IPC and SOME/IP (vsomeip) implementations",
+      "IdsR forwarder with pluggable transports: MQTT, WebSocket, HTTP REST",
+      "39 GoogleTest cases mapped directly to AUTOSAR SWS_IdM requirements",
+    ],
+    tags: ["AUTOSAR", "IdsM/IdsR", "SOME/IP", "MQTT", "C++"],
+    featured: true,
+  },
+  {
+    id: "0x0500",
     name: "DoIP_ECU_Simulator",
     repo: "https://github.com/niketdhale/DOIP_ECU_Simulator",
     lang: "C",
@@ -100,7 +131,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "0x0400",
+    id: "0x0600",
     name: "SOC dashboard pipeline",
     repo: "https://github.com/niketdhale/autosar-idsm-toolkit",
     lang: "Infra",
@@ -112,37 +143,6 @@ export const projects: Project[] = [
       "All Apache-2.0/MIT components — safe for commercial/OEM contexts",
     ],
     tags: ["Grafana", "InfluxDB", "Telegraf", "MQTT"],
-    featured: true,
-  },
-  {
-    id: "0x0500",
-    name: "sovd-toolkit",
-    repo: "https://github.com/niketdhale/sovd-toolkit",
-    lang: "C++",
-    summary:
-      "A production-shaped SOVD (ASAM/ISO 17978-3) server and client stack for Linux — real UDS/DoIP translation behind a REST/HTTP+JSON diagnostic API, a two-tier gateway/domain topology, and security treated as a first-class requirement throughout.",
-    details: [
-      "C-ABI adapter seam translating SOVD calls into real UDS/DoIP services (0x22/0x2E/0x2F, 0x19/0x14, 0x10, 0x31, 0x27) against classic, SOVD-unaware ECUs",
-      "Vehicle-level gateway proxying to per-domain servers over mutual TLS, with OAuth2 bearer auth and SecurityAccess gating both the ECU and the caller",
-      "Vue 3 web UI and a C++ client SDK/CLI, both built purely from server self-description via /docs — zero hardcoded DIDs",
-      "Security events feed MQTT → Telegraf → InfluxDB → Grafana; four-adapter-config CI matrix with a CycloneDX SBOM published per run",
-    ],
-    tags: ["SOVD", "UDS/DoIP", "mTLS", "OAuth2", "Vue 3", "C++"],
-    featured: true,
-  },
-  {
-    id: "0x0600",
-    name: "UDS-29-auth-toolkit",
-    repo: "https://github.com/niketdhale/UDS-29-auth-toolkit",
-    lang: "C",
-    summary:
-      "ISO 14229-1 UDS 0x29 Authentication toolkit in C11: tester (client) and ECU (server) with X.509 PKI and OEM-configurable certificate-based access control.",
-    details: [
-      "DoIP and CAN ISO-TP transports with an AUTOSAR-style API",
-      "Runs on Linux, QNX and FreeRTOS",
-      "OpenSSL, mbedTLS or HSM crypto backends; optional IDSM reporting",
-    ],
-    tags: ["UDS 0x29", "X.509 PKI", "DoIP", "ISO-TP", "C11"],
     featured: true,
   },
   {
