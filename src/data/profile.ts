@@ -7,7 +7,7 @@ export const profile = {
   kanji: "ニケット",
   title: "Automotive Cybersecurity & Embedded Software Engineer",
   tagline:
-    "5+ years securing vehicle networks at a major Japanese OEM — AUTOSAR IDS/SecOC, WP.29 certification, and full-stack ECU security from CAN to SOC.",
+    "6+ years securing vehicle networks at a major Japanese OEM — AUTOSAR IDS/SecOC, WP.29 certification, and full-stack ECU security from CAN to SOC.",
   location: "Tokyo, Japan",
   email: "niketdhale27@gmail.com",
   github: "https://github.com/niketdhale",
@@ -57,13 +57,15 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/UDS-29-auth-toolkit",
     lang: "C",
     summary:
-      "ISO 14229-1 UDS 0x29 Authentication toolkit in C11: tester (client) and ECU (server) with X.509 PKI and OEM-configurable certificate-based access control.",
+      "A small, embeddable ISO 14229-1:2020 service 0x29 (Authentication) implementation in plain C11 with certificate-based unidirectional and bidirectional authentication, covering both the tester (client) and the ECU (server) with static memory and no heap. Includes OEM-definable certificate-based access control, a simulated ECU with fault injection, and an optional bridge that reports authentication failures to the AUTOSAR IDSM toolkit.",
     details: [
-      "DoIP and CAN ISO-TP transports with an AUTOSAR-style API",
-      "Runs on Linux, QNX and FreeRTOS",
-      "OpenSSL, mbedTLS or HSM crypto backends; optional IDSM reporting",
+      "AUTOSAR-style client API (blocking and non-blocking StartAuthentication/MainFunction/RxIndication) and DCM-style server handler Uds29Srv_HandleRequest, supporting sub-functions 0x00-0x03 and 0x08 with standard NRCs",
+      "Certificate validation pipeline: chain of trust through intermediate CAs, validity with trusted-time hook, CRL and serial blacklist, keyUsage/EKU and key-type/signature-algorithm policy",
+      "Access control from the client certificate: roles and service/DID/routine allow-lists in an OEM-defined format, enforced against an ECU rule table with NRC 0x34",
+      "Pluggable crypto (OpenSSL ECDSA P-256/Ed25519, mbedTLS 3.x, or HSM/PKCS#11) and OS port (POSIX on Linux/QNX, FreeRTOS); about 44 KB static RAM for the client and 5.3 KB for the server",
+      "Simulated ECU with fault injection (expired cert, bad signature, challenge mismatch), interactive uds29_cli, two-process DoIP and CAN ISO-TP demos, GoogleTest suites and a CI matrix",
     ],
-    tags: ["UDS 0x29", "X.509 PKI", "DoIP", "ISO-TP", "C11"],
+    tags: ["UDS 0x29", "ISO 14229-1", "X.509 PKI", "Access Control", "DoIP", "ISO-TP", "mbedTLS", "C11"],
     featured: true,
   },
   {
@@ -151,13 +153,16 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/repro-toolkit",
     lang: "Rust",
     summary:
-      "Parses automotive PDX/ODX files into UDS ECU reprogramming sequences as JSON.",
+      "A cross-platform Rust library and CLI for automotive ECU reprogramming that parses a PDX archive (ZIP-packaged ODX, ISO 22901) and generates the ordered UDS (ISO 14229) repro sequence as a JSON document. The same implementation works as a Rust library, from any language over a small C ABI, or as a standalone CLI, on Linux and Windows.",
     details: [
-      "ISO 22901 (ODX) input, ISO 14229 (UDS) reprogramming sequences out",
-      "CLI with FFI support",
+      "Orders steps into the canonical UDS flash sequence: session control, security seed/key, erase, RequestDownload, TransferData, transfer exit, check memory, ECU reset; unmatched services are kept as OTHER so nothing from the ODX is dropped",
+      "TransferData chunking per flash block honouring UDS maxNumberOfBlockLength (configurable, default 0x0FFF), with a wrapping BlockSequenceCounter on each chunk",
+      "Custom sequence JSON files to insert vendor steps, reorder or replace the default, plus a validate command that lints for overlapping byte positions, invalid hex and out-of-order steps",
+      "FFI via six C-ABI functions returning JSON, with runnable examples for C, C++, Python, C# and Rust",
+      "Negative response codes annotated with ISO 14229-1 names; Cargo workspace of core, ffi and cli crates with CI",
     ],
-    tags: ["Rust", "ODX/PDX", "UDS", "ECU flashing"],
-    featured: false,
+    tags: ["Rust", "ODX/PDX", "ISO 22901", "UDS", "ECU flashing", "FFI", "CLI"],
+    featured: true,
   },
 ];
 
