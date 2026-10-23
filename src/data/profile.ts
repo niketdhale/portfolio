@@ -115,21 +115,6 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "0x0500",
-    name: "Verso — resume builder",
-    repo: "https://github.com/niketdhale/resume-builder",
-    lang: "Vue 3",
-    summary:
-      "A full resume-building web app with a three-pane editor, live preview, PDF export, and a complete design system.",
-    details: [
-      "Vue 3 + Vite + Tailwind v4, deployed on Vercel with Bun-powered CI/CD",
-      "Drag-and-drop sections/entries, 15 section types, localStorage + adapter-based storage layer",
-      "GitHub Actions pipeline: lint → unit tests → Playwright E2E → deploy",
-    ],
-    tags: ["Vue 3", "Vite", "Tailwind", "CI/CD"],
-    featured: true,
-  },
-  {
     id: "0x0600",
     name: "sovd-toolkit",
     repo: "https://github.com/niketdhale/sovd-toolkit",
