@@ -115,7 +115,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "0x0600",
+    id: "0x0500",
     name: "sovd-toolkit",
     repo: "https://github.com/niketdhale/sovd-toolkit",
     lang: "C++",
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "0x0700",
+    id: "0x0600",
     name: "UDS-29-auth-toolkit",
     repo: "https://github.com/niketdhale/UDS-29-auth-toolkit",
     lang: "C",
@@ -146,7 +146,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "0x0800",
+    id: "0x0700",
     name: "repro-toolkit",
     repo: "https://github.com/niketdhale/repro-toolkit",
     lang: "Rust",
