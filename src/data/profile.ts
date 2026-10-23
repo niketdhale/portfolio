@@ -16,9 +16,11 @@ export const profile = {
 };
 
 export const about = [
-  `I'm an automotive cybersecurity engineer working on-site at Nissan Motor, leading a ~10-engineer team across the full vehicle security stack — from CAN-level JASPAR MAC authentication and AUTOSAR SecOC, through AUTOSAR IDS violation aggregation and off-board reporting, to ECU bootstrap and certificate provisioning for Gateway, IVI, and IVC.`,
-  `I've directly contributed to WP.29/UN-R155 cybersecurity certification for 6 vehicle lines — ICE, E-Power, and EV — and presented security demonstrations at CAR-ELE 2022. On the open-source side I'm building a full AUTOSAR security ecosystem: IdsM toolkit, CAN IDS, SecOC simulator, and a DoIP ECU simulator, all wired into a sensor-to-SOC pipeline — and, on top of it, sovd-toolkit, a production-shaped SOVD server/client stack that talks real UDS/DoIP to those same simulated ECUs behind a REST/HTTP+JSON diagnostic API.`,
-  `Based in Tokyo and studying Japanese. My next move is toward Software-Defined Vehicle platforms and embedded software, where security is designed in from the start rather than layered on after.`,
+  "Likes to: build automotive security tooling (IDS, SecOC, UDS/DoIP) from the spec up",
+  "Likes to: simulate ECUs and test them on the bench",
+  "Likes to: turn security events into dashboards",
+  "Likes to: explore Rust, Vue and Software-Defined Vehicle ideas",
+  "Likes to: study Japanese in Tokyo",
 ];
 
 export type Project = {
@@ -55,7 +57,7 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/can-ids-toolkit",
     lang: "C++",
     summary:
-      "Whitelist-based CAN IDS with DLC validation and frequency monitoring, aligned with AUTOSAR IDS Protocol Specification — designed for HIL testing and bench validation.",
+      "Lightweight, zero-dependency C++17 CAN intrusion detection library and CLI: default-deny ID whitelist, Classic/CAN FD DLC validation, and frequency-based flood detection with thread-safe rules.",
     details: [
       "Whitelist enforcement + DLC validation + message frequency monitoring",
       "Aligned to AUTOSAR IDS Protocol Specification",
@@ -71,7 +73,7 @@ export const projects: Project[] = [
     repo: "https://github.com/niketdhale/secoc-can-toolkit",
     lang: "C++",
     summary:
-      "AUTOSAR SecOC simulator with OpenSSL AES-128-CMAC, freshness value management, and AUTOSAR C API (SecOc_Init, SecOc_Transmit) over Linux SocketCAN.",
+      "AUTOSAR SecOC simulator in C++17 over Linux SocketCAN: AES-128-CMAC, counter/timestamp Freshness Value Manager, configurable MAC/FV truncation, anti-replay window, and an AUTOSAR-style C API.",
     details: [
       "AES-128-CMAC MAC generation/verification via OpenSSL",
       "Freshness value management per AUTOSAR SecOC profiles",
@@ -84,10 +86,10 @@ export const projects: Project[] = [
   {
     id: "0x0300",
     name: "DoIP_ECU_Simulator",
-    repo: "https://github.com/niketdhale/DoIP_ECU_Simulator",
+    repo: "https://github.com/niketdhale/DOIP_ECU_Simulator",
     lang: "C",
     summary:
-      "Full ISO 13400-2 DoIP ECU simulator with UDS service handling (ISO 14229), TLS extension, and unit + integration test suite.",
+      "ISO 13400-2 DoIP stack in C: an ECU simulator plus a reusable client library (libdoip) with UDS forwarding, TLS/DTLS, ISO-TP, IPv6 and an async API.",
     details: [
       "Full ISO 13400-2 DoIP protocol implementation",
       "UDS service handling per ISO 14229",
@@ -142,6 +144,35 @@ export const projects: Project[] = [
     ],
     tags: ["SOVD", "UDS/DoIP", "mTLS", "OAuth2", "Vue 3", "C++"],
     featured: true,
+  },
+  {
+    id: "0x0700",
+    name: "UDS-29-auth-toolkit",
+    repo: "https://github.com/niketdhale/UDS-29-auth-toolkit",
+    lang: "C",
+    summary:
+      "ISO 14229-1 UDS 0x29 Authentication toolkit in C11: tester (client) and ECU (server) with X.509 PKI and OEM-configurable certificate-based access control.",
+    details: [
+      "DoIP and CAN ISO-TP transports with an AUTOSAR-style API",
+      "Runs on Linux, QNX and FreeRTOS",
+      "OpenSSL, mbedTLS or HSM crypto backends; optional IDSM reporting",
+    ],
+    tags: ["UDS 0x29", "X.509 PKI", "DoIP", "ISO-TP", "C11"],
+    featured: true,
+  },
+  {
+    id: "0x0800",
+    name: "repro-toolkit",
+    repo: "https://github.com/niketdhale/repro-toolkit",
+    lang: "Rust",
+    summary:
+      "Parses automotive PDX/ODX files into UDS ECU reprogramming sequences as JSON.",
+    details: [
+      "ISO 22901 (ODX) input, ISO 14229 (UDS) reprogramming sequences out",
+      "CLI with FFI support",
+    ],
+    tags: ["Rust", "ODX/PDX", "UDS", "ECU flashing"],
+    featured: false,
   },
 ];
 
